@@ -56,17 +56,14 @@ pub fn numeric(n int) int {
     return str.join('').int()
 }
 
-/*
+/* TODO: uncomment these once Generics are back
 pub fn shuffle<T>(arr []T) []T {
    mut clone := arr
     
     for i in range(0, arr.len).reverse() {
         j := rand.next(i+1)
-        temp := clone[j]
-        clone[j] = clone[i]
-        clone[i] = temp
+        clone[j], clone[i] = clone[i], clone[j]
     }
-    
     return clone
 }
 

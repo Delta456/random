@@ -27,3 +27,7 @@ pub fn weibull_variate(alpha, beta f32) f32 {
 	u := 1.0 - rand_f32()
 	return alpha * math.pow((-math.log(u)), (1.0/beta))
 }
+
+pub fn lognorm_variate(mu, stigma f32) f32 {
+	return math.exp(normal_variate(mu, stigma))
+}
