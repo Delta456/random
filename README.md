@@ -1,2 +1,3 @@
-# random_v
-[WIP] Port of Python's random library to V
+# random
+
+An all purpose random library written in V.

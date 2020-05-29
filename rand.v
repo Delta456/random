@@ -1,38 +1,66 @@
 module random
 
 import rand
-import math
-import arrays
+//import math
+//import range
 
-const(
-    nv_magic = f32(4) * math.exp(-0.5)/math.sqrt(2.0)
-)
-fn rand() int {
-    return C.rand()
+pub struct IntRange {
+    start int
+    stop int
+    step int = 1
 }
 
-fn uniform(a, b f32) f32 {
-    return a + (b-a) * f32(rand())
+//type RandType = int | f32
+pub fn uniform(a, b f32) f32 {
+    return a + (b-a) * rand_f32()
 }
-/*
-fn normal_variate(mu, stigma f32) f32 {
-    for {
-        u1 := f32(rand())
-        u2 := 1.0 - f32(rand())
-        z := nv_magic * (u1-0.5)/u2
-        zz := z*z/4.0
-         if zz <= -math.log(u2) {
-                break
-         }
-        return mu + z*stigma
+
+pub fn int_range(range IntRange) int {
+    if range.stop == 0 {
+        if range.start > 1 {
+            return rand.next(range.start)
+        }
+        eprintln('random: empty range for int_range()')
+        exit(0)
     }
-} 
+    width := range.stop - range.start
+    mut n := 0
+    if range.step == 1 {
+        if width > 0 {
+            return range.start + rand.next(width)
+        }
+        eprintln('random: empty range for int_range($range.start, $range.stop, $width)')
+    }
 
-*/
-fn shuffle<T>(arr []T) []T {
+    if range.step > 0 {
+        n = (width + range.step - 1) / range.step
+    }
+    else if range.step < 0 {
+        n = (width + range.step + 1) / range.step
+    }
+    else {
+        eprintln('random: empty range provided')
+        exit(0)
+
+    }
+   return range.start + range.step * rand.next(n)
+}
+
+pub fn numeric(n int) int {
+    mut str := []string{}
+    digits_ := digits.split('')
+
+    for i := 0; i < n; i++ {
+        str << digits_[rand.next(digits_.len)]
+    }
+    return str.join('').int()
+}
+
+/*
+pub fn shuffle<T>(arr []T) []T {
    mut clone := arr
     
-    for i in arrays.range<int>(0, arr.len).reverse() {
+    for i in range(0, arr.len).reverse() {
         j := rand.next(i+1)
         temp := clone[j]
         clone[j] = clone[i]
@@ -46,4 +74,5 @@ fn shuffle<T>(arr []T) []T {
 pub fn choose<T>(arr []T) T {
     return arr[rand.next(arr.len)]
 }
+*/
 
