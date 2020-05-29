@@ -10,6 +10,12 @@ pub struct IntRange {
     step int = 1
 }
 
+pub struct FloatRange {
+    start f32
+    stop f32
+    step f32 = 1.0
+}
+
 //type RandType = int | f32
 pub fn uniform(a, b f32) f32 {
     return a + (b-a) * rand_f32()
@@ -30,6 +36,7 @@ pub fn int_range(range IntRange) int {
             return range.start + rand.next(width)
         }
         eprintln('random: empty range for int_range($range.start, $range.stop, $width)')
+        exit(0)
     }
 
     if range.step > 0 {
@@ -44,6 +51,38 @@ pub fn int_range(range IntRange) int {
 
     }
    return range.start + range.step * rand.next(n)
+}
+
+pub fn float_range(range FloatRange) f32 {
+    if range.stop == 0 {
+        if range.start >= 1 {
+            return float_next(range.start)
+        }
+        eprintln('random: empty range for int_range()')
+        exit(0)
+    }
+    width := range.stop - range.start
+    mut n := 0
+    if range.step == 1 {
+        if width > 0 {
+            return range.start + float_next(width)
+        }
+        eprintln('random: empty range for float_range($range.start, $range.stop, $width)')
+        exit(0)
+    }
+
+    if range.step > 0 {
+        n = (width + range.step - 1) / range.step
+    }
+    else if range.step < 0 {
+        n = (width + range.step + 1) / range.step
+    }
+    else {
+        eprintln('random: empty range provided')
+        exit(0)
+
+    }
+   return range.start + range.step * float_next(n)
 }
 
 pub fn numeric(n int) int {
@@ -72,4 +111,3 @@ pub fn choose<T>(arr []T) T {
     return arr[rand.next(arr.len)]
 }
 */
-
