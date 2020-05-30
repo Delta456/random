@@ -11,6 +11,12 @@ const (
     sg_magic = 1.0 + math.log(4.5)
 )
 
+pub struct Triangular {
+    low f32 = 1.0
+    high f32 = 1.0
+    mode int = 1
+}
+
 pub fn normal_variate(mu, stigma f32) f32 {
     for {
         u1 := rand_f32()
@@ -40,7 +46,7 @@ pub fn lognorm_variate(mu, stigma f32) f32 {
 pub fn gamma_variate(alpha, beta f32) f32 {
     if alpha <= 0.0 && beta <= 0.0 {
         eprintln('random.gamma_variate: alpha and beta must be > 0.0')
-        exit(0)
+        exit(1)
     }
 
     if alpha > 1.0 {
@@ -134,4 +140,19 @@ pub fn vommeises_variate(mu, kappa f32) f32 {
         theta = math.fmod((mu - sin.acos(f)), twopi)
     }
     return theta
+}
+
+pub fn triangular(mut tri Triangular) f32 {
+   mut u := rand_f32()
+   mut c := if tri.mode == 1 { 0.5 } else { (tri.mode - tri.low) / (tri.high - tri.low) }
+    if c == 0 {
+        return tri.low
+    }
+
+    if u > c {
+        u -= 1.0
+        c -= 1.0
+        tri.low , tri.high = tri.high , tri.low
+    }
+    return tri.low + (tri.high - tri.low) * math.sqrt(u * c)
 }

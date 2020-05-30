@@ -1,6 +1,7 @@
 module random
 
 import rand
+import range
 
 const (
 	captial_letters = 'ABCDEFGHIJLMNOPQURSTUVWXYZ'
@@ -12,17 +13,21 @@ const (
 
 pub fn string(n int) string {
 	mut str := []string{}
-    cap := captial_letters.split('')
-	small := small_letters.split('')
-	num := rand_arr()
+	letters_ = letters.split('')
 
-	for i := 0; i < n; i++ {
-		if num == 1 {
-			str << cap[rand.next(cap.len)] + small[rand.next(small.len)]
-		}
-		else if num == 2 {
-			str << small[rand.next(small.len)] + cap[rand.next(cap.len)] 
-		}
+	for i in range(stop:n) {
+		str << letters_[rand.next(cap.len)]
+	}
+	return str.join('')
+}
+
+pub fn string_alpha(n int) string {
+	mut str := []string{}
+	letters_ = letters.split('')
+	nums := digits.split('')
+
+	for i in range(stop:n) {
+		str << nums[rand.next(num.len)] + letters_[rand.next(letters_.len)]
 	}
 	return str.join('')
 }

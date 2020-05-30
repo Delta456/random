@@ -22,8 +22,9 @@ fn float_next(num f32) f32 {
 fn rand_f32() f32 {
     return f32(rand.next(C.RAND_MAX)) / (f32(C.RAND_MAX) + f32(1))
 }
-
+/*
 fn rand_arr() int {
     a := [1, 2]
     return a[rand.next(a.len)]
 }
+*/

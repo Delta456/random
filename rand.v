@@ -27,7 +27,7 @@ pub fn int_range(range IntRange) int {
             return rand.next(range.start)
         }
         eprintln('random: empty range for int_range()')
-        exit(0)
+        exit(1)
     }
     width := range.stop - range.start
     mut n := 0
@@ -36,7 +36,7 @@ pub fn int_range(range IntRange) int {
             return range.start + rand.next(width)
         }
         eprintln('random: empty range for int_range($range.start, $range.stop, $width)')
-        exit(0)
+        exit(1)
     }
 
     if range.step > 0 {
@@ -47,7 +47,7 @@ pub fn int_range(range IntRange) int {
     }
     else {
         eprintln('random: empty range provided')
-        exit(0)
+        exit(1)
 
     }
    return range.start + range.step * rand.next(n)
@@ -58,8 +58,8 @@ pub fn float_range(range FloatRange) f32 {
         if range.start >= 1 {
             return float_next(range.start)
         }
-        eprintln('random: empty range for int_range()')
-        exit(0)
+        eprintln('random: empty range for float_range()')
+        exit(1)
     }
     width := range.stop - range.start
     mut n := 0
@@ -68,7 +68,7 @@ pub fn float_range(range FloatRange) f32 {
             return range.start + float_next(width)
         }
         eprintln('random: empty range for float_range($range.start, $range.stop, $width)')
-        exit(0)
+        exit(1)
     }
 
     if range.step > 0 {
@@ -79,7 +79,7 @@ pub fn float_range(range FloatRange) f32 {
     }
     else {
         eprintln('random: empty range provided')
-        exit(0)
+        exit(1)
 
     }
    return range.start + range.step * float_next(n)
@@ -93,6 +93,11 @@ pub fn numeric(n int) int {
         str << digits_[rand.next(digits_.len)]
     }
     return str.join('').int()
+}
+
+pub fn bool() bool {
+    boo := [true, false]
+    return boo[rand.next(boo.len)]
 }
 
 /* TODO: uncomment these once Generics are back
