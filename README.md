@@ -20,6 +20,10 @@ An all purpose random library written in V.
 - Via `vpkg`
     - `vpkg install random`
 
+## Docs
+
+Comments are given in all `.v` files in the repo. It wil hosted on vdoc or pasted on the `README.md` soon.
+
 ## Usage
 
 In `main.v`
