@@ -144,7 +144,7 @@ pub fn triangular(mut tri Triangular) f32 {
 	if u > c {
 		u -= 1.0
 		c -= 1.0
-		tri.lowtri.high = tri.high, tri.low
+		tri.low, tri.high = tri.high, tri.low
 	}
 	return f32(tri.low + (tri.high - tri.low) * math.sqrt(u * c))
 }
