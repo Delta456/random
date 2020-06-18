@@ -2,8 +2,6 @@ module random
 
 import rand
 
-// import math
-// import range
 pub struct IntRange {
 	start int
 	stop  int
@@ -16,11 +14,12 @@ pub struct FloatRange {
 	step  f32 = 1.0
 }
 
-// type RandType = int | f32
+// uniform returns a random number between the range [a, b) or [a, b] depeinding on rounding
 pub fn uniform(a, b f32) f32 {
 	return a + (b - a) * rand.f32()
 }
 
+// int_range returns a random int between the specified range
 pub fn int_range(range IntRange) int {
 	if range.stop == 0 {
 		if range.start > 1 {
@@ -49,6 +48,7 @@ pub fn int_range(range IntRange) int {
 	return range.start + range.step * rand.intn(n)
 }
 
+// float_range returns a float upon the given range
 pub fn float_range(range FloatRange) f32 {
 	if range.stop == 0 {
 		if range.start >= 1 {
@@ -77,6 +77,7 @@ pub fn float_range(range FloatRange) f32 {
 	return range.start + range.step * rand.f32n(n)
 }
 
+// numeric returns a number with n digits long
 pub fn numeric(n int) int {
 	mut str := []string{}
 	digits_ := digits.split('')
@@ -87,11 +88,13 @@ pub fn numeric(n int) int {
 	return str.join('').int()
 }
 
+// bool returns a random bool
 pub fn bool() bool {
 	boo := [true, false]
 	return boo[rand.intn(boo.len)]
 }
 
+// shuffle returns the new shuffled array
 pub fn shuffle<T>(arr []T) []T {
 	mut clone := arr
 	for i in range(0, arr.len).reverse() {
@@ -101,6 +104,7 @@ pub fn shuffle<T>(arr []T) []T {
 	return clone
 }
 
+// choose returns a random element from the array
 pub fn choose<T>(arr []T) T {
 	return arr[rand.intn(arr.len)]
 }

@@ -19,6 +19,8 @@ mut:
 	mode int = 1
 }
 
+// normal_variate is the normal distribution
+// where mu is the mean, and stigma is the standard deviation
 pub fn normal_variate(mu, stigma f32) f32 {
 	for {
 		u1 := rand.f32()
@@ -32,19 +34,34 @@ pub fn normal_variate(mu, stigma f32) f32 {
 	}
 }
 
+// expo_variate is the expovariate distribution
+// where lambda is 1.0 divided by the desired mean. It should be nonzerp.
+// return values range from 0 to positive infinity if lambda is positive else negative/
 pub fn expo_variate(lambda f32) f32 {
 	return f32(-math.log(1.0 - rand.f32()) / lambda)
 }
 
+// weibull distribution
+// where alpha is the scale parameter and beta is the shape parameter
 pub fn weibull_variate(alpha, beta f32) f32 {
 	u := 1.0 - rand.f32()
 	return f32(alpha * math.pow((-math.log(u)), (1.0 / beta)))
 }
 
+// lognorm_variate is the log nomral distribution
+// If you take the natural logarithm of this distribution, you'll get a
+// normal distribution with mean mu and standard deviation sigma.
+// mu can have any value, and sigma must be greater than zero
 pub fn lognorm_variate(mu, stigma f32) f32 {
 	return f32(math.exp(normal_variate(mu, stigma)))
 }
 
+// gamma_distribution is the gamma distribution
+// conditions on the parameters are alpha > 0 and beta > 0.
+//        The probability distribution function is:
+//                   math.pow(x, (alpha - 1)) * math.exp(-x / beta)
+//         pdf(x) =  --------------------------------------
+//                     math.gamma(alpha) * math.pow(beta, alpha)
 pub fn gamma_variate(alpha, beta f32) f32 {
 	if alpha <= 0.0 && beta <= 0.0 {
 		eprintln('random.gamma_variate: alpha and beta must be > 0.0')
@@ -94,6 +111,9 @@ pub fn gamma_variate(alpha, beta f32) f32 {
 	}
 }
 
+// beta_variate is the beta distribution
+// parameters alpha > 0 and beta > 0
+// return values range between 0 and 1
 pub fn beta_variate(alpha, beta f32) f32 {
 	y := gamma_variate(alpha, 1.0)
 	if y == 0 {
@@ -102,11 +122,13 @@ pub fn beta_variate(alpha, beta f32) f32 {
 	return y / (y + gamma_variate(beta, 1.0))
 }
 
+// pareto_variate is pareto distribution. alpha is the shape paramter
 pub fn pareto_variate(alpha f32) f32 {
 	u := 1.0 - rand.f32()
 	return f32(1.0 / math.pow(u, 1.0 / alpha))
 }
 
+// vommeises_variate is the circular data distribution
 pub fn vommeises_variate(mu, kappa f32) f32 {
 	if kappa <= 1e-6 {
 		return twopi * rand.f32()
@@ -135,6 +157,9 @@ pub fn vommeises_variate(mu, kappa f32) f32 {
 	return f32(theta)
 }
 
+// triangular is the triangular distribution.
+// continuous distribution bounded by given lower and upper limits,
+// and having a given mode value in-between
 pub fn triangular(mut tri Triangular) f32 {
 	mut u := rand.f32()
 	mut c := if tri.mode == 1 { 0.5 } else { (tri.mode - tri.low) / (tri.high - tri.low) }

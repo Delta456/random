@@ -10,6 +10,7 @@ const (
 	symbols         = '!@#$%^&*()_+=|/'
 )
 
+// string returns a random string of n length 
 pub fn string(n int) string {
 	mut str := []string{}
 	letters_ := letters.split('')
@@ -19,6 +20,7 @@ pub fn string(n int) string {
 	return str.join('')
 }
 
+// string_alpha returns an alpha string of n length
 pub fn string_alpha(n int) string {
 	mut str := []string{}
 	letters_ := letters.split('')
