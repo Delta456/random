@@ -84,14 +84,14 @@ fn beta_variate(alpha, beta f32) f32
 // paramter.
 fn pareto_variate(alpha f32) f32
 
-
-//  where mu is the mean angle, expressed in radians between 0 and 2*pi, and
-//  kappa is the concentration parameter, which must be greater than or
-//  equal to zero. If kappa is equal to zero, this distribution reduces
-//  to a uniform random angle over the range 0 to 2*pi
-//  mu: mean angle (in radians between 0 and 2*pi)
-//  kappa: concentration parameter kappa (>= 0)
-//  if kappa == 0 then generate uniform random angle
+// vommeises_variate is the circular data distribution
+// where mu is the mean angle, expressed in radians between 0 and 2*pi, and
+// kappa is the concentration parameter, which must be greater than or
+// equal to zero. If kappa is equal to zero, this distribution reduces
+// to a uniform random angle over the range 0 to 2*pi
+// mu: mean angle (in radians between 0 and 2*pi)
+// kappa: concentration parameter kappa (>= 0)
+// if kappa == 0 then generate uniform random angle
 fn vommeises_variate(mu, kappa f32) f32
 
 // triangular is the triangular distribution. continuous 
