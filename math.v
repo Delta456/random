@@ -12,6 +12,7 @@ const (
 	sg_magic = 1.0 + math.log(4.5)
 )
 
+// struct for `triangular()`
 pub struct Triangular {
 mut:
 	low  f32 = 1.0
@@ -41,7 +42,7 @@ pub fn expo_variate(lambda f32) f32 {
 	return f32(-math.log(1.0 - rand.f32()) / lambda)
 }
 
-// weibull distribution
+// weibull_variate is the weibull distribution
 // where alpha is the scale parameter and beta is the shape parameter
 pub fn weibull_variate(alpha, beta f32) f32 {
 	u := 1.0 - rand.f32()
@@ -129,6 +130,13 @@ pub fn pareto_variate(alpha f32) f32 {
 }
 
 // vommeises_variate is the circular data distribution
+//  where mu is the mean angle, expressed in radians between 0 and 2*pi, and
+//  kappa is the concentration parameter, which must be greater than or
+//  equal to zero. If kappa is equal to zero, this distribution reduces
+//  to a uniform random angle over the range 0 to 2*pi
+//  mu: mean angle (in radians between 0 and 2*pi)
+//  kappa: concentration parameter kappa (>= 0)
+//  if kappa == 0 then generate uniform random angle
 pub fn vommeises_variate(mu, kappa f32) f32 {
 	if kappa <= 1e-6 {
 		return twopi * rand.f32()

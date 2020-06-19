@@ -2,19 +2,21 @@ module random
 
 import rand
 
+// struct for `int_range()`
 pub struct IntRange {
 	start int
 	stop  int
 	step  int = 1
 }
 
+// struct for `float_range()`
 pub struct FloatRange {
 	start f32
 	stop  f32
 	step  f32 = 1.0
 }
 
-// uniform returns a random number between the range [a, b) or [a, b] depeinding on rounding
+// uniform returns a random number between the range [a, b) or [a, b] depending on rounding
 pub fn uniform(a, b f32) f32 {
 	return a + (b - a) * rand.f32()
 }
@@ -48,7 +50,7 @@ pub fn int_range(range IntRange) int {
 	return range.start + range.step * rand.intn(n)
 }
 
-// float_range returns a float upon the given range
+// float_range returns a random float upon the given range
 pub fn float_range(range FloatRange) f32 {
 	if range.stop == 0 {
 		if range.start >= 1 {
