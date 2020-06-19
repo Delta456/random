@@ -99,7 +99,7 @@ pub fn shuffle<T>(arr []T) []T {
 	mut clone := arr
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
-		clone[j]clone[i] = clone[i], clone[j]
+		clone[j], clone[i] = clone[i], clone[j]
 	}
 	return clone
 }
