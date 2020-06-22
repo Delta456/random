@@ -9,7 +9,7 @@ fn main() {
 		println(random.bool())
 	    println(random.choose<int>([2, 4, 6, 8, 9, 7]))
 		println(random.shuffle<int>([2, 4, 6, 8, 9, 7], false))
-		println(random.sample<int>([2, 4, 6, 7, 12, 8], 4, false, true))
+		println(random.sample<int>([2, 4, 6, 7, 12, 8, 4 , 7, 5], 4, true, false))
 		println(random.numeric(5))
 		println(random.int_range(start: 5, stop: 15, step: 2))
 		println(random.float_range(start: 5.3, stop: 15.4, step: 2.0))

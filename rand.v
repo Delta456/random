@@ -97,39 +97,51 @@ pub fn bool() bool {
 
 // shuffle returns the new shuffled array. If more_randomize is true 
 // then more random array will be produced which slowers the function.
-pub fn shuffle<T>(arr []T, more_randomize bool) []T {
+pub fn shuffle<T>(arr []T, more_random bool) []T {
 	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
 		temp := clone[j]
         clone[j] = clone[i]
         clone[i] = temp
-		if more_randomize {
-			rand.seed([u32(j), 0])
+		if more_random {
+			rand.seed([u32(clone.len), 0])
 		}
 	}
 	return clone
 }
 
-pub fn sample<T>(arr []T, k int, more_randomize bool, allow_repetitions bool) []T {
+pub fn sample<T>(arr []T, k int, more_random bool, no_repetition bool) []T {
 	mut a := []T{}
 	if k <= 0 {
 		eprintln('random.sample: number should be greater than 0')
 		exit(1)
 	}
-	for i in range(0, k) {
+	for _ in range(0, k) {
 		j := rand.intn(arr.len)
-		if !allow_repetitions {
+		if no_repetitions {
 			if arr[j] !in a {
 				a << arr[j]
-			} 
+			}
 		} else {
 			a << arr[j]
 		}
-		if more_randomize {
-			rand.seed([u32(arr.len), 0])
+		if more_random {
+			rand.seed([u32(a.len), 0])
 		}
 	}
+    // this can happen in the worst cases
+	if a.len != k {
+		for a.len != k {
+			len := rand.int(arr.len)
+			if no_repetitions {
+			   if arr[len] !in a {
+				a << arr[len]
+			   }
+			}
+	    }
+	}
+
 	return a
 }
 
