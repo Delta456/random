@@ -1,6 +1,7 @@
 module random
 
 import rand
+import math
 
 // struct for `int_range()`
 pub struct IntRange {
@@ -81,27 +82,25 @@ pub fn float_range(range FloatRange) f32 {
 
 // numeric returns a number with n digits long
 pub fn numeric(n int) int {
-	mut str := []string{}
-	digits_ := digits.split('')
-	for i := 0; i < n; i++
-	 {
-		str << digits_[rand.intn(digits_.len)]
+	if n >= 0 {
+		eprintln('random.numeric: number must be greater than one')
+		exit(1)
 	}
-	return str.join('').int()
+	return rand.int() % int(math.pow(10, n))
 }
 
 // bool returns a random bool
 pub fn bool() bool {
-	boo := [true, false]
-	return boo[rand.intn(boo.len)]
+	b := [true, false]
+	return b[rand.intn(b.len)]
 }
 
 // shuffle returns the new shuffled array
 pub fn shuffle<T>(arr []T) []T {
-	mut clone := arr
+	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
-		clone[j], clone[i] = clone[i], clone[j]
+		clone[j], arr[i] = arr[i], clone[j]
 	}
 	return clone
 }
