@@ -83,7 +83,7 @@ pub fn float_range(range FloatRange) f32 {
 // numeric returns a number with n digits long
 pub fn numeric(n int) int {
 	if n <= 0 {
-		eprintln('random.numeric: number must be greater than one')
+		eprintln('numeric: number must be greater than one')
 		exit(1)
 	}
 	return rand.int() % int(math.pow(10, n))
@@ -95,17 +95,36 @@ pub fn bool() bool {
 	return b[rand.intn(b.len)]
 }
 
-// shuffle returns the new shuffled array
-pub fn shuffle<T>(arr []T) []T {
+// shuffle returns the new shuffled array. If more_randomize is true 
+// then more random array will be produced which slowers the function.
+pub fn shuffle<T>(arr []T, more_randomize bool) []T {
 	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
 		temp := clone[j]
         clone[j] = clone[i]
         clone[i] = temp
-		
+		if more_randomize {
+			rand.seed([u32(j), 0])
+		}
 	}
 	return clone
+}
+
+pub fn sample<T>(arr []T, k int, more_randomize bool) []T {
+	mut a := []T{}
+	if k <= 0 {
+		eprintln('random.sample: number should be greater than 0')
+		exit(1)
+	}
+	for i in range(0, k) {
+		j := rand.intn(arr.len)
+		a << arr[j]
+		if more_randomize {
+			rand.seed([u32(arr.len), 0])
+		}
+	}
+	return a
 }
 
 // choose returns a random element from the array
