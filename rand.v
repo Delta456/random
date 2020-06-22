@@ -111,7 +111,7 @@ pub fn shuffle<T>(arr []T, more_randomize bool) []T {
 	return clone
 }
 
-pub fn sample<T>(arr []T, k int, more_randomize bool) []T {
+pub fn sample<T>(arr []T, k int, more_randomize bool, allow_repetitions bool) []T {
 	mut a := []T{}
 	if k <= 0 {
 		eprintln('random.sample: number should be greater than 0')
@@ -119,6 +119,11 @@ pub fn sample<T>(arr []T, k int, more_randomize bool) []T {
 	}
 	for i in range(0, k) {
 		j := rand.intn(arr.len)
+		if !allow_repetitions {
+			if arr[j] !in a {
+				a << arr[j]
+			} 
+		}
 		a << arr[j]
 		if more_randomize {
 			rand.seed([u32(arr.len), 0])
