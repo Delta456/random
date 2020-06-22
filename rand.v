@@ -82,7 +82,7 @@ pub fn float_range(range FloatRange) f32 {
 
 // numeric returns a number with n digits long
 pub fn numeric(n int) int {
-	if n >= 0 {
+	if n <= 0 {
 		eprintln('random.numeric: number must be greater than one')
 		exit(1)
 	}
@@ -96,11 +96,14 @@ pub fn bool() bool {
 }
 
 // shuffle returns the new shuffled array
-pub fn shuffle<T>(mut arr []T) []T {
+pub fn shuffle<T>(arr []T) []T {
 	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
-		clone[j], arr[i] = arr[i], clone[j]
+		temp := clone[j]
+        clone[j] = clone[i]
+        clone[i] = temp
+		
 	}
 	return clone
 }
