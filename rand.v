@@ -111,7 +111,7 @@ pub fn shuffle<T>(arr []T, more_random bool) []T {
 	return clone
 }
 
-pub fn sample<T>(arr []T, k int, more_random bool, no_repetition bool) []T {
+pub fn sample<T>(arr []T, k int, more_random bool, no_repetitions bool) []T {
 	mut a := []T{}
 	if k <= 0 {
 		eprintln('random.sample: number should be greater than 0')
@@ -133,7 +133,7 @@ pub fn sample<T>(arr []T, k int, more_random bool, no_repetition bool) []T {
     // this can happen in the worst cases
 	if a.len != k {
 		for a.len != k {
-			len := rand.int(arr.len)
+			len := rand.intn(arr.len)
 			if no_repetitions {
 			   if arr[len] !in a {
 				a << arr[len]
