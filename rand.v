@@ -96,7 +96,7 @@ pub fn bool() bool {
 }
 
 // shuffle returns the new shuffled array
-pub fn shuffle<T>(arr []T) []T {
+pub fn shuffle<T>(mut arr []T) []T {
 	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
