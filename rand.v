@@ -123,8 +123,9 @@ pub fn sample<T>(arr []T, k int, more_randomize bool, allow_repetitions bool) []
 			if arr[j] !in a {
 				a << arr[j]
 			} 
+		} else {
+			a << arr[j]
 		}
-		a << arr[j]
 		if more_randomize {
 			rand.seed([u32(arr.len), 0])
 		}
