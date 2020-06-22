@@ -45,7 +45,7 @@ pub fn int_range(range IntRange) int {
 	} else if range.step < 0 {
 		n = (width + range.step + 1) / range.step
 	} else {
-		eprintln('random: empty range provided')
+		eprintln('random.int_range: empty range provided')
 		exit(1)
 	}
 	return range.start + range.step * rand.intn(n)
@@ -74,7 +74,7 @@ pub fn float_range(range FloatRange) f32 {
 	} else if range.step < 0 {
 		n = (width + range.step + 1) / range.step
 	} else {
-		eprintln('random: empty range provided')
+		eprintln('random.float_range: empty range provided')
 		exit(1)
 	}
 	return range.start + range.step * rand.f32n(n)
@@ -83,7 +83,7 @@ pub fn float_range(range FloatRange) f32 {
 // numeric returns a number with n digits long
 pub fn numeric(n int) int {
 	if n <= 0 {
-		eprintln('numeric: number must be greater than one')
+		eprintln('random.numeric: number must be greater than one')
 		exit(1)
 	}
 	return rand.int() % int(math.pow(10, n))
@@ -97,24 +97,25 @@ pub fn bool() bool {
 
 // shuffle returns the new shuffled array. If more_randomize is true 
 // then more random array will be produced which slowers the function.
-pub fn shuffle<T>(arr []T, more_random bool) []T {
+pub fn shuffle<T>(arr []T) []T {
 	mut clone := arr.clone()
 	for i in range(0, arr.len).reverse() {
 		j := rand.intn(i + 1)
 		temp := clone[j]
         clone[j] = clone[i]
         clone[i] = temp
-		if more_random {
-			rand.seed([u32(clone.len), 0])
-		}
 	}
 	return clone
 }
 
-pub fn sample<T>(arr []T, k int, more_random bool, no_repetitions bool) []T {
+pub fn sample<T>(arr []T, k int, no_repetitions bool) []T {
 	mut a := []T{}
 	if k <= 0 {
 		eprintln('random.sample: number should be greater than 0')
+		exit(1)
+	}
+	if k == arr.len {
+		eprintln('random.sample: k and length of array must not be equal')
 		exit(1)
 	}
 	for _ in range(0, k) {
@@ -125,9 +126,6 @@ pub fn sample<T>(arr []T, k int, more_random bool, no_repetitions bool) []T {
 			}
 		} else {
 			a << arr[j]
-		}
-		if more_random {
-			rand.seed([u32(a.len), 0])
 		}
 	}
     // this can happen in the worst cases
