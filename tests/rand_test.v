@@ -16,7 +16,7 @@ fn test_bool() {
 fn test_numeric() {
 	for i := 0; i < 10; i++ {
 		b := random.numeric(5)
-		println(b.str().len)
+		//println(b.str().len)
 		assert b.str().len == 5 || b.str().len == 6 || b.str().len == 4
 	}
 }
