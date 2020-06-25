@@ -21,7 +21,7 @@ jobs:
     - name: Build example
       run: |
         cd ./vlib/random/
-        v test random_test.v
+        v test tests/rand_test.v
 
   macos:
     runs-on: macos-latest
@@ -41,7 +41,7 @@ jobs:
     - name: Build example
       run: |
         cd ./vlib/random/
-        v test random_test.v
+        v test tests/rand_test.v
 
   windows-msvc:
     runs-on: windows-latest
@@ -57,7 +57,7 @@ jobs:
       with:
         path: vlib/random
     - name: Build V
-      run: .\make.bat -msvc
+      run: .\make.bat -msvc -skip-path
     # Don't move applying V directory to PATH, to other steps
     - name: Build example
-      run: .\v.exe test .\vlib\random\random_test.v
+      run: .\v.exe test .\vlib\random\tests\rand_test.v

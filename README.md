@@ -123,6 +123,10 @@ fn bool() bool
 // shuffle returns the new shuffled array
 fn shuffle<T>(arr []T) []T
 
+// sample returns the new k-sized array
+// no_repetitions must be true when no repetitions are needed
+// else it must be false
+fn sample<T>(arr []T, k int) []T
 
 // choose returns a random element from the array
 fn choose<T>(arr []T) T
