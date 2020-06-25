@@ -102,8 +102,7 @@ pub fn bool() bool {
         return b[rand.intn(b.len)]
 }
 
-// shuffle returns the new shuffled array. If more_randomize is true
-// then more random array will be produced which slowers the function.
+// shuffle returns the new shuffled array.
 pub fn shuffle<T>(arr []T) []T {
         mut clone := arr.clone()
         for i in range(0, arr.len).reverse() {
@@ -115,6 +114,9 @@ pub fn shuffle<T>(arr []T) []T {
         return clone
 }
 
+// sample returns the new k-sized array
+// no_repetitions must be true when no repetitions are needed
+// else it must be false
 pub fn sample<T>(arr []T, k int, no_repetitions bool) []T {
         mut sub_array := []T{}
         if k <= 0 {
