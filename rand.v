@@ -77,7 +77,15 @@ pub fn float_range(range FloatRange) f32 {
                 eprintln('random.float_range: empty range provided')
                 exit(1)
         }
-        return range.start + range.step * rand.f32n(n)
+        mut result := range.start + range.step * rand.f32n(n)
+        // this happens in worst cases
+        if result > range.stop {
+                 for result > range.stop {
+                  result = range.start + range.step * rand.f32n(n)
+               }   
+        }
+        return result
+       
 }
 
 // numeric returns a number with n digits long
