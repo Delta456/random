@@ -79,7 +79,7 @@ pub fn float_range(range FloatRange) f32 {
         }
         mut result := range.start + range.step * rand.f32n(n)
         // this happens in worst cases
-        if result > range.stop {
+        if result > range.stop && range.step > 0 {
                  for result > range.stop {
                   result = range.start + range.step * rand.f32n(n)
                }   

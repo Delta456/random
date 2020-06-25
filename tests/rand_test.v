@@ -39,7 +39,7 @@ fn test_float_range() {
 	for i := 0; i < 10; i++ {
 		b := random.float_range(start: 5.3, stop: 15.4, step: 2.0)
 		assert b >= f32(5.3)
-		//assert b < f32(16) 
+		assert b < f32(15.4) 
 	}
 
 	for i := 0; i < 10; i++ {
