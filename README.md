@@ -103,18 +103,14 @@ fn triangular(mut tri Triangular) f32
 // [a, b] depending on rounding
 fn uniform(a, b f32) f32
 
-
 // int_range returns a random int between the specified range
 fn int_range(range IntRange) int
-
 
 // float_range returns a random float upon the given range
 fn float_range(range FloatRange) f32
 
-
 // numeric returns a number with n digits long
 fn numeric(n int) int
-
 
 // bool returns a random bool
 fn bool() bool
