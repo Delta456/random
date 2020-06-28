@@ -119,7 +119,6 @@ fn numeric(n int) int
 // bool returns a random bool
 fn bool() bool
 
-
 // shuffle returns the new shuffled array
 fn shuffle<T>(arr []T) []T
 
