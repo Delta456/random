@@ -94,7 +94,6 @@ pub fn numeric(n int) int {
                 exit(1)
         }
         num := rand.int() % int(math.pow(10, n))
-        // happens in 1 out of 100 cases
         return num
 }
 
