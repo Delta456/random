@@ -93,13 +93,13 @@ pub fn numeric(n int) int {
                 eprintln('random.numeric: number must be greater than one')
                 exit(1)
         }
-        mut num := rand.int() % int(math.pow(10, n))
-        // happens in 1 out of 100 cases
+        num := rand.int() % int(math.pow(10, n))
+      /*  // happens in 1 out of 100 cases
         if num.str().len != n || num.str().len != n + 1 {
                 for num.str().len != n || num.str().len != n + 1 {
                         num = rand.int() % int(math.pow(10, n))
                 }
-        }
+        }*/
         return num
 }
 
