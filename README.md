@@ -129,7 +129,6 @@ fn choose<T>(arr []T) T
 // string returns a random string of n length
 fn string(n int) string
 
-
 // string_alpha returns an alpha string of n length
 fn string_alpha(n int) string
 ```
