@@ -1,3 +1,5 @@
+# THIS MODULE HAS BEEN DEPRECATED AND [V'S RAND MODULE](https://github.com/vlang/v/tree/master/vlib/rand) SHOULD BE USED INSTEAD!
+
 # random
 
 An all purpose random library written in V.
